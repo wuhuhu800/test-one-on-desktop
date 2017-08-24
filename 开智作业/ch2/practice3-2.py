@@ -17,14 +17,13 @@ def SearchWeather(UserInput):
             wind =m['results'][0]['now']['wind_direction']#风向
             temperature =m['results'][0]['now']['temperature']#温度
             lasttime =m['results'][0]['last_update']#更新时间
-            print('北京的天气为%s' %weather)
-            print('风向为%s,温度为%s摄氏度'%(wind,temperature))
-            print('更新时间为:%s' %lasttime)
+            print('''%s的天气为%s,风向为%s,温度为%s摄氏度,更新时间为:%s'''
+            %(UserInput,weather,wind,temperature,lasttime))
             SeachLog[UserInput] = weather
             UserInput = input('请输入城市名称>> ')
     except KeyError: # keyerror抓取
 
-        if UserInput == 'help':
+        if UserInput in ('help','h'):
             print('''
         输入城市名称，查询该城市的的天气
         输入help，获取帮助文档
@@ -35,7 +34,7 @@ def SearchWeather(UserInput):
             SearchWeather(UserInput)
         elif UserInput == 'quit':
             os._exit(1)
-        elif UserInput =='history':
+        elif UserInput == 'history':
             for LogKey in SeachLog:
                 print('{}的天气为：{}'.format(LogKey,SeachLog[LogKey]))
             UserInput = input('请重新输入城市名称>> ')
