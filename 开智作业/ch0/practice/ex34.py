@@ -1,0 +1,10 @@
+animals = ['bear', 'python', 'peacook', 'kangroo', 'whale', 'platypus']
+animals1 = animals[1]
+animals2 = animals[2]
+animals3 = animals[0]
+animals4 = animals[3]
+animals5 = animals[4]
+animals6 = animals[3]
+animals7 = animals[5]
+animals8 = animals[4]
+print animals1,animals2,animals3,animals4,animals5,animals6,animals7,animals8
