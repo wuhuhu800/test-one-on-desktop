@@ -7,6 +7,7 @@ url = "https://api.seniverse.com/v3/weather/now.json" #知心天气API
 UserInput = input('请输入所要查询的天气>>> ')
 
 SeachLog = {}
+his1 = []
 def SearchWeather(UserInput):
     try:
         while True:
@@ -17,9 +18,11 @@ def SearchWeather(UserInput):
             wind =m['results'][0]['now']['wind_direction']#风向
             temperature =m['results'][0]['now']['temperature']#温度
             lasttime =m['results'][0]['last_update']#更新时间
-            print('''%s的天气为%s,风向为%s,温度为%s摄氏度,更新时间为:%s'''
-            %(UserInput,weather,wind,temperature,lasttime))
             SeachLog[UserInput] = weather
+            #下面一行是将拼接字符串
+            weather_str =f'{UserInput}的天气为{weather},风向为{wind},温度为{temperature}摄氏度,更新时间为:{lasttime}'
+            print(weather_str)
+            his1.append(weather_str)
             UserInput = input('请输入城市名称>> ')
     except KeyError: # keyerror抓取
 
@@ -35,8 +38,11 @@ def SearchWeather(UserInput):
         elif UserInput == 'quit':
             os._exit(1)
         elif UserInput == 'history':
-            for LogKey in SeachLog:
-                print('{}的天气为：{}'.format(LogKey,SeachLog[LogKey]))
+            caculater = 0
+            for historyLine in his1:
+                caculater = caculater + 1
+                print('第%d次查询:'%caculater)
+                print(historyLine)
             UserInput = input('请重新输入城市名称>> ')
             SearchWeather(UserInput)
         else:
