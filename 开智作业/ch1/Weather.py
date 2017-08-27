@@ -14,9 +14,9 @@ dic ={}
 with open ("weather_info.txt","r",encoding = 'utf-8') as NewWeather:
 
 
-    for i in range(2554):  #for循环必须在with open函数底下=，否则会报错，大概是文件没有关闭
+#    for i in range(2554):  #for循环必须在with open函数底下=，否则会报错，大概是文件没有关闭
 
-        NewWeather1 = NewWeather.readline().strip('\n').split(',')
+        NewWeather1 = NewWeather.read.strip('\n').split(',')
         dic[NewWeather1[0]] = NewWeather1[1]
         NewWeather2 =[]
 
