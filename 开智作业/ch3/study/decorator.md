@@ -35,3 +35,56 @@ name1
 post action
 返回值 'bike lala'
 ```
+- 含参数的decorator用法：
+```javascript
+def wap(name1,name2):
+    print("^"*20)
+
+    def decorator2(func):
+        print("@"*20)
+        def dec(*args):
+            print('d'*20)
+            print(name2)
+            print(name1)
+            print('pre action')
+            result = func(*args)
+            print('post action')
+            return result
+        return dec
+    return decorator2
+
+@wap('f2','f5')
+def test_f2(name):
+    print(name)
+    return 'like'
+
+@wap('f3','f4')
+def test_f3(name):
+    print(name)
+    return "dike"
+
+#test_f2('name2')
+test_f3('name3')
+```
+说明：首先会运行@wap('f2','f5')和@wap('f3','f4')的函数的print以及里面的decorator2的print
+     然后运行函数test_f3('name3')，由于wap有参数，所以test_f3传给作为decorator2的参数，而
+     test_f3的参数name3，传给了decorator2子函数dec的参数。此时注意，在dec函数里的仍然可以
+     用wap的参数进行运算。所以此时result = func(* args)就是result = test_f3('name3')
+     同样，decorator2函数的返回值就是dec函数的返回值，wap函数的返回值decorator2就是
+     deccorator2的返回值dec
+
+运行结果如下：
+
+```javascript
+^^^^^^^^^^^^^^^^^^^^
+@@@@@@@@@@@@@@@@@@@@
+^^^^^^^^^^^^^^^^^^^^
+@@@@@@@@@@@@@@@@@@@@
+dddddddddddddddddddd
+f4
+f3
+pre action
+name3
+post action
+返回值：'dike'
+```
