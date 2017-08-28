@@ -303,3 +303,4 @@ Out[98]:
 ```
 说明：装饰器找自己对应的函数是根据装饰器return对应的函数名称寻找应该用哪个函数。装饰器不能同时
 返回两个函数，如 return dec，nec是错误的。
+部分参考[*** python中decorator的用法及原理（一）***](http://blog.csdn.net/u013696062/article/details/51065406)
