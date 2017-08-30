@@ -13,13 +13,14 @@
 <form action="/test" method="post" >
 城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username }}">
 <input type="submit" value="查询">
-<input type="button" value=历史 name = “history”>
+<input type="button" value=历史 name = “history” onclick="historydate()">
 <input type="button" value=帮助 name = ”help“ onclick="Helptext()">
 
 <!--message显示的内容，@app.route('/test',methods=['POST']底下return，message参数)-->
 {% if message %}
 <p style="color:blue">{{ message }}</p>
 {% endif %}
+
 <script>
 function Helptext()
 {
@@ -30,9 +31,27 @@ function Helptext()
 }
 <!--JavaScript的函数可以实现button响应事件-->
 <!--字符串反斜杠目的是让字符串换行可以连上而不影响语法,<br />显示换行内容-->
+
+
+</script>
+
+<script type="text/javascript">
+function historydate()
+{
+  var arr = new Array();
+  var dict = [];
+  dict['ssee']='message'
+  dict['ssqq']='message1'
+  for (var key in dict)
+  arr[arr.length] =(key + ':' + dict[key]+'</br>' )
+  document.getElementById("helpcontent").innerHTML=arr
+}
 </script>
 
 <p id="helpcontent"></p>
+
+
+
 </form>
 
 
