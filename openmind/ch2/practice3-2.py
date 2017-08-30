@@ -50,4 +50,11 @@ def SearchWeather(UserInput):
             UserInput = input('请重新输入城市名称>> ')
             SearchWeather(UserInput)
 
-SearchWeather(UserInput)
+#SearchWeather(UserInput)
+
+if __name__ == "__main__":
+    SearchWeather(UserInput)
+    print("test11 %s" %__name__)
+
+else:
+    print("test22 %s" %__name__)

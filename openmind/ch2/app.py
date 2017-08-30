@@ -1,5 +1,4 @@
 from flask import Flask,request,render_template,make_response,url_for
-import practicetest
 
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
@@ -12,16 +11,11 @@ def signin_form():
 
 @app.route('/signin',methods=['POST'])
 def signin():
-#以下一行将request.form[username]输入的内容作为参数传给天SearchWeather的参数，再给username
-    username = practicetest.SearchWeather(request.form['username'])
-    return render_template('form.html',message = username)
-
-#    password = request.form['password']
-
-
-#    if username == 'admin'  and password =='password':
-#        return render_template('signin-ok.html',username = username)
-#    return render_template('form.html',message = 'Bad username or password',username = username,password = password)
+    username = request.form['username']
+    password = request.form['password']
+    if username == 'admin' and password =='password':
+        return render_template('signin-ok.html',username = username)
+    return render_template('form.html',message = 'Bad username or password',username = username,password = password)
 
 @app.route('/test',methods=['GET'])
 def test():
@@ -44,7 +38,7 @@ def test_1():
     return render_template('test.html')
 
 
-@app.errorhandler(404) #404报错
+@app.errorhandler(404)
 def not_found(error):
     resp = make_response(render_template('error.html'),404)
     resp.headers['X-something'] = 'A value'
