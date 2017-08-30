@@ -32,16 +32,18 @@ def test():
 
 @app.route('/test',methods=['POST'])
 def test_1():
-    username = request.form["user"]#form就是test.html里的form，form里的user参数就是test.html里的form的input的name的值,request.form
-    helpdoc = request.form['help']
-    if username =='user':
-        return render_template('signin-ok.html',username = username)#此处黄色username应该是模板里的{{username}}，白色username是变量
-    elif helpdoc == 'POST':
-        return render_template('home.html')
-    else:
-        print(1)
+    username = practicetest.SearchWeather(request.form['user'])
 
-    return render_template('test.html')
+#    username = request.form["user"]#form就是test.html里的form，form里的user参数就是test.html里的form的input的name的值,request.form
+#    helpdoc = request.form['help']
+#    if username =='user':
+#        return render_template('signin-ok.html',username = username)#此处黄色username应该是模板里的{{username}}，白色username是变量
+#    elif helpdoc == 'POST':
+#        return render_template('home.html')
+#    else:
+#        print(1)
+
+    return render_template('test.html',message = username)
 
 
 @app.errorhandler(404) #404报错

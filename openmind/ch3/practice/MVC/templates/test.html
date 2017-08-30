@@ -6,10 +6,9 @@
   </head>
   <body>
 <p><h1>test for once</h1></p>
-{% if message %}
-<p style="color:red">{{ message }}</p>
-{% endif %}
+
 <p><img src=" {{url_for('static',filename='Weatherpic@2x.png')}}" alt="天气图片" width="600" height="320" ></p>
+<!--显示图片的时候一定要static是放图片地址，filename是图片名称，alt是在无法显示图片的时候显示文字-->
 
 <form action="/test" method="post" >
 城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username }}">
@@ -17,6 +16,10 @@
 <input type="button" value=历史 name = “history”>
 <input type="button" value=帮助 name = ”help“ onclick="Helptext()">
 
+<!--message显示的内容，@app.route('/test',methods=['POST']底下return，message参数)-->
+{% if message %}
+<p style="color:blue">{{ message }}</p>
+{% endif %}
 <script>
 function Helptext()
 {
@@ -25,6 +28,8 @@ function Helptext()
 点击'帮助'按钮，获取帮助文档<br />\
 点击'历史'按钮，获取查询历史</i>";
 }
+<!--JavaScript的函数可以实现button响应事件-->
+<!--字符串反斜杠目的是让字符串换行可以连上而不影响语法,<br />显示换行内容-->
 </script>
 
 <p id="helpcontent"></p>
