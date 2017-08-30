@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+  </head>
+  <body>
+<p><h1>test for once</h1></p>
+{% if message %}
+<p style="color:red">{{ message }}</p>
+{% endif %}
+<p><img src=" {{url_for('static',filename='Weatherpic@2x.png')}}" alt="天气图片" width="600" height="320" ></p>
+
+<form action="/test" method="post" >
+城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username }}">
+<input type="submit" value="查询">
+<input type="button" value=历史 name = “histor”>
+<input type="button" value=帮助 name= ”help“>
+</form>
+
+
+  </body>
+</html>
