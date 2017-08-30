@@ -15,7 +15,7 @@ def signin():
     password = request.form['password']
     if username == 'admin' and password =='password':
         return render_template('signin-ok.html',username = username)
-    return render_template('form.html',message = 'Bad username or password',username = username)
+    return render_template('form.html',message = 'Bad username or password',username = username,password = password)
 
 @app.route('/test',methods=['GET'])
 def test():
@@ -26,9 +26,15 @@ def test():
 
 @app.route('/test',methods=['POST'])
 def test_1():
-    username = request.form['user']
+    username = request.form["user"]#form就是test.html里的form，form里的user参数就是test.html里的form的input的name的值,request.form
+    helpdoc = request.form['help']
     if username =='user':
-        return render_template('signin-ok.html',username = username)
+        return render_template('signin-ok.html',username = username)#此处黄色username应该是模板里的{{username}}，白色username是变量
+    elif helpdoc == 'POST':
+        return render_template('home.html')
+    else:
+        print(1)
+
     return render_template('test.html')
 
 
@@ -37,6 +43,22 @@ def not_found(error):
     resp = make_response(render_template('error.html'),404)
     resp.headers['X-something'] = 'A value'
     return resp
+
+'''
+@app.route('/newtest',methods=['GET'])
+def newtest_form():
+    return render_template('newtest.html')
+
+@app.route('/newtest',methods=['POST'])
+def newtest():
+    username = request.form['username']
+    password = request.form['password']
+    if username == 'admin' and password =='password':
+        return render_template('signin-ok.html',username = username)
+    return render_template('form.html',message = 'Bad username or password',username = username)
+'''
+
+
 
 if __name__ =='__main__':
     app.run()

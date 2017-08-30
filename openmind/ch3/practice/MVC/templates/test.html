@@ -14,8 +14,20 @@
 <form action="/test" method="post" >
 城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username }}">
 <input type="submit" value="查询">
-<input type="button" value=历史 name = “histor”>
-<input type="button" value=帮助 name= ”help“>
+<input type="button" value=历史 name = “history”>
+<input type="button" value=帮助 name = ”help“ onclick="Helptext()">
+
+<script>
+function Helptext()
+{
+	document.getElementById("helpcontent").innerHTML=
+"<i>输入城市名称，查询该城市的的天气<br />\
+点击'帮助'按钮，获取帮助文档<br />\
+点击'历史'按钮，获取查询历史</i>";
+}
+</script>
+
+<p id="helpcontent"></p>
 </form>
 
 
