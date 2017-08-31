@@ -18,7 +18,6 @@
 
 <!--message显示的内容，@app.route('/test',methods=['POST']底下return，message参数)-->
 {% if message %}
-<p id="userid">'llll'</p>
 <p style="color:blue" id=“messageid”>{{ message }}</p>
 {% endif %}
 
@@ -37,16 +36,24 @@ function Helptext()
 </script>
 
 <script>
+//var dict = [];
+//var mesg = {{ messagejs|safe }};
+//var userid = {{ userjs|safe }};
+//dict[userid] = mesg;
+var dict = {{ historydate|safe }}
 function Helptext1()
 {
   var arr = new Array();
-  var dict = [];
-  var mesg = {{ messagejs|safe }}
-  var userid = {{ userjs|safe }}
+  for (var key in dict)
+       arr[arr.length] =(key + ':' + dict[key]+'</br>');//将产生的元素增加在arr列表末端
+
+
 //  var mesg = document.getElementById("messageid").innerHTML
 
 // var userid = document.getElementById("userid").innerHTML
- document.getElementById("helpcontent1").innerHTML = userid
+ //document.getElementById("helpcontent1").innerHTML = arr
+  document.getElementById("helpcontent").innerHTML = arr
+
  //document.getElementById("helpcontent").innerHTML="历史";
 }
 //function historydate()
@@ -69,7 +76,7 @@ function Helptext1()
 </script>
 
 <p id="helpcontent"></p>
-<p id="helpcontent1"></p>
+
 
 
 </form>

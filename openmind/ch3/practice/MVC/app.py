@@ -2,6 +2,8 @@ from flask import Flask,request,render_template,make_response,url_for
 import practicetest #导入practicetest.py文件，注意导入文件不能命名XXX2-3，否则报错
 import json
 
+historydate ={}
+
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def home():
@@ -35,6 +37,7 @@ def test():
 def test_1():
     user = request.form['user']
     username = practicetest.SearchWeather(user)
+    historydate[user]= username
 #上一行将request.form[username]输入的内容作为参数传给天SearchWeather的参数，再给username
 
 #    username = request.form["user"]#form就是test.html里的form，form里的user参数就是test.html里的form的input的name的值,request.form
@@ -46,8 +49,8 @@ def test_1():
 #    else:
 #        print(1)
 
-    return render_template('test.html',message = username,user = user,messagejs=json.dumps(username),userjs=json.dumps(user))
-#message就是在显示天气的内容。
+    return render_template('test.html',message = username,user = user,historydate=json.dumps(historydate))
+#message就是在显示天气的内容。()  json.dumps()目的就是传给JavaScript的值，直接无法传值
 
 @app.errorhandler(404) #404报错
 def not_found(error):
