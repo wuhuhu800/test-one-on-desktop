@@ -10,7 +10,7 @@
 <p><img src=" {{url_for('static',filename='Weatherpic@2x.png')}}" alt="天气图片" width="600" height="320" ></p>
 <!--显示图片的时候一定要static是放图片地址，filename是图片名称，alt是在无法显示图片的时候显示文字-->
 
-<form action="/test" method="post" >
+<form action="/Weather" method="post" >
 城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username }}">
 <input type="submit" value="查询">
 <input type="button" value=历史 name = “history” onclick="Helptext1()">

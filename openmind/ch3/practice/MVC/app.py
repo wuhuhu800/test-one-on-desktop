@@ -9,31 +9,31 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
-@app.route('/signin',methods=['GET'])
-def signin_form():
-    return render_template('form.html')
+#@app.route('/signin',methods=['GET'])
+#def signin_form():
+#    return render_template('form.html')
 
-@app.route('/signin',methods=['POST'])
-def signin():
+#@app.route('/signin',methods=['POST'])
+#def signin():
 #以下一行将request.form[username]输入的内容作为参数传给天SearchWeather的参数，再给username
 #    username = practicetest.SearchWeather(request.form['username'])
 #    return render_template('form.html',message = username)
-    username = request.form['username']
-    password = request.form['password']
+#    username = request.form['username']
+#    password = request.form['password']
 
 
-    if username == 'admin'  and password =='password':
-       return render_template('signin-ok.html',username = username,password= password)
-    return render_template('form.html',message = 'Bad username or password',username = username,password = password)
+#    if username == 'admin'  and password =='password':
+#       return render_template('signin-ok.html',username = username,password= password)
+#    return render_template('form.html',message = 'Bad username or password',username = username,password = password)
 
-@app.route('/test',methods=['GET'])
+@app.route('/Weather',methods=['GET'])
 def test():
-    return render_template('test.html')
+    return render_template('Weather.html')
 
 #with app.test_request_context():
 #    print(url_for('test'))
 
-@app.route('/test',methods=['POST'])
+@app.route('/Weather',methods=['POST'])
 def test_1():
     user = request.form['user']
     username = practicetest.SearchWeather(user)
@@ -49,7 +49,7 @@ def test_1():
 #    else:
 #        print(1)
 
-    return render_template('test.html',message = username,user = user,historydate=json.dumps(historydate))
+    return render_template('Weather.html',message = username,user = user,historydate=json.dumps(historydate))
 #message就是在显示天气的内容。()  json.dumps()目的就是传给JavaScript的值，直接无法传值
 
 @app.errorhandler(404) #404报错
@@ -59,15 +59,15 @@ def not_found(error):
     return resp
 
 
-@app.route('/student')
-def student():
-   return render_template('student.html')
+#@app.route('/student')
+#def student():
+ #  return render_template('student.html')
 
-@app.route('/result',methods = ['POST', 'GET'])
-def result():
-   if request.method == 'POST':
-      result = request.form
-   return render_template("result.html",result = result)
+#@app.route('/result',methods = ['POST', 'GET'])
+#def result():
+#   if request.method == 'POST':
+#      result = request.form
+ #  return render_template("result.html",result = result)
 '''
 @app.route('/newtest',methods=['GET'])
 def newtest_form():
