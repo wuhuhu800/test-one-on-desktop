@@ -13,12 +13,13 @@
 <form action="/test" method="post" >
 城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username }}">
 <input type="submit" value="查询">
-<input type="button" value=历史 name = “history” onclick="historydate()">
+<input type="button" value=历史 name = “history” onclick="Helptext1()">
 <input type="button" value=帮助 name = ”help“ onclick="Helptext()">
 
 <!--message显示的内容，@app.route('/test',methods=['POST']底下return，message参数)-->
 {% if message %}
-<p style="color:blue">{{ message }}</p>
+<p id="userid">'llll'</p>
+<p style="color:blue" id=“messageid”>{{ message }}</p>
 {% endif %}
 
 <script>
@@ -35,21 +36,40 @@ function Helptext()
 
 </script>
 
-<script type="text/javascript">
-function historydate()
+<script>
+function Helptext1()
 {
   var arr = new Array();
   var dict = [];
-  dict['ssee']='message'
-  dict['ssqq']='message1'
-  for (var key in dict)
-  arr[arr.length] =(key + ':' + dict[key]+'</br>' )
-  document.getElementById("helpcontent").innerHTML=arr
+  var mesg = {{ messagejs|safe }}
+  var userid = {{ userjs|safe }}
+//  var mesg = document.getElementById("messageid").innerHTML
+
+// var userid = document.getElementById("userid").innerHTML
+ document.getElementById("helpcontent1").innerHTML = userid
+ //document.getElementById("helpcontent").innerHTML="历史";
 }
+//function historydate()
+//{
+//  var arr = new Array();
+//  var dict = [];
+
+// var mesg = document.getElementById("messageid").innerHTML
+//  var userid = document.getElementById("userid").innerHTML
+//  dict['ssee']='message'
+//  dict['ssqq']='message1'
+//  dict[userid] = mesg
+//  for (var key in dict)
+//  arr[arr.length] =(key + ':' + dict[key]+'</br>' )
+
+//  document.getElementById("helpcontent").innerHTML=arr
+//   document.getElementById("helpcontent").innerHTML="历史"；
+
+//}
 </script>
 
 <p id="helpcontent"></p>
-
+<p id="helpcontent1"></p>
 
 
 </form>

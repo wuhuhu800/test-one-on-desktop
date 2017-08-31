@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Please Sign In </title>
@@ -7,12 +8,17 @@
   <form action="/signin" method="post">
     <legend>Please sign in: </legend>
     <p><input name="username" placeholder="Username" value="{{ username }}"></p>
-    <p><input name="password" placeholder="Password" type="password"></p>
+<!--    <p><input name="password" placeholder="Password" type="password"></p>-->
+    <p><input name="password" placeholder="Password" value=""="{{ password }}"></p>
     <p><button type="submit" >Sign In </button></p>
-  </form>
+
 
   {% if message %}
   <p style="color:red">{{ message }}</p>
   {% endif %}
+
+  <p>Welcome, {{ username }}</p>
+  <p>{{ username }}‘是不对的’{{ password }}</p>
+
 </body>
 </html>

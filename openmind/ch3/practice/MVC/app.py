@@ -1,5 +1,6 @@
 from flask import Flask,request,render_template,make_response,url_for
-import practicetest
+import practicetest #导入practicetest.py文件，注意导入文件不能命名XXX2-3，否则报错
+import json
 
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
@@ -13,15 +14,15 @@ def signin_form():
 @app.route('/signin',methods=['POST'])
 def signin():
 #以下一行将request.form[username]输入的内容作为参数传给天SearchWeather的参数，再给username
-    username = practicetest.SearchWeather(request.form['username'])
-    return render_template('form.html',message = username)
+#    username = practicetest.SearchWeather(request.form['username'])
+#    return render_template('form.html',message = username)
+    username = request.form['username']
+    password = request.form['password']
 
-#    password = request.form['password']
 
-
-#    if username == 'admin'  and password =='password':
-#        return render_template('signin-ok.html',username = username)
-#    return render_template('form.html',message = 'Bad username or password',username = username,password = password)
+    if username == 'admin'  and password =='password':
+       return render_template('signin-ok.html',username = username,password= password)
+    return render_template('form.html',message = 'Bad username or password',username = username,password = password)
 
 @app.route('/test',methods=['GET'])
 def test():
@@ -32,7 +33,9 @@ def test():
 
 @app.route('/test',methods=['POST'])
 def test_1():
-    username = practicetest.SearchWeather(request.form['user'])
+    user = request.form['user']
+    username = practicetest.SearchWeather(user)
+#上一行将request.form[username]输入的内容作为参数传给天SearchWeather的参数，再给username
 
 #    username = request.form["user"]#form就是test.html里的form，form里的user参数就是test.html里的form的input的name的值,request.form
 #    helpdoc = request.form['help']
@@ -43,8 +46,8 @@ def test_1():
 #    else:
 #        print(1)
 
-    return render_template('test.html',message = username)
-
+    return render_template('test.html',message = username,user = user,messagejs=json.dumps(username),userjs=json.dumps(user))
+#message就是在显示天气的内容。
 
 @app.errorhandler(404) #404报错
 def not_found(error):
