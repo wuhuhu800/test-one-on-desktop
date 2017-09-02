@@ -36,10 +36,7 @@ function Helptext()
 </script>
 
 <script>
-//var dict = [];
-//var mesg = {{ messagejs|safe }};
-//var userid = {{ userjs|safe }};
-//dict[userid] = mesg;
+
 var dict = {{ historydate|safe }}
 function Helptext1()
 {
@@ -49,39 +46,13 @@ function Helptext1()
        var str = arr.toString() //将列表的元素转换成字符串，并且用逗号连接
 	     str = str.replace(/,/g, "")//将字符串去掉所有的逗号
 
-//  var mesg = document.getElementById("messageid").innerHTML
+   document.getElementById("helpcontent").innerHTML = str
 
-// var userid = document.getElementById("userid").innerHTML
- //document.getElementById("helpcontent1").innerHTML = arr
-       document.getElementById("helpcontent").innerHTML = str
-
- //document.getElementById("helpcontent").innerHTML="历史";
 }
-//function historydate()
-//{
-//  var arr = new Array();
-//  var dict = [];
-
-// var mesg = document.getElementById("messageid").innerHTML
-//  var userid = document.getElementById("userid").innerHTML
-//  dict['ssee']='message'
-//  dict['ssqq']='message1'
-//  dict[userid] = mesg
-//  for (var key in dict)
-//  arr[arr.length] =(key + ':' + dict[key]+'</br>' )
-
-//  document.getElementById("helpcontent").innerHTML=arr
-//   document.getElementById("helpcontent").innerHTML="历史"；
-
-//}
 </script>
-
 <p id="helpcontent"></p>
 
-
-
 </form>
-
 
   </body>
 </html>
