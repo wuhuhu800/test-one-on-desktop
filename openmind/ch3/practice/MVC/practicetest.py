@@ -13,7 +13,7 @@ def SearchWeather(UserInput):
 
     try:
         paramsdict ={'key': 'lom0ftfaihx65jh0','location':UserInput ,'language': 'zh-Hans','unit': 'c'}
-        req = requests.get(url,params=paramsdict,timeout =1)
+        req = requests.get(url,params=paramsdict,timeout =5)
         m= req.json()#知心天气接口返回值为str，需要转为dict
         weather =m['results'][0]['now']['text']
         wind =m['results'][0]['now']['wind_direction']#风向
@@ -24,6 +24,8 @@ def SearchWeather(UserInput):
 
     except KeyError:
         return "该城市目前没有被收录,请重新输入"
+    except ConnectionError:
+        return "ConnectionError"
 
 if __name__ == "__main__":
     UserInput = input('请输入所要查询的天气>>> ')
