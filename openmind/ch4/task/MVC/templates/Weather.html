@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+  </head>
+  <body>
+<p><h1>天气预报</h1></p>
+
+<p><img src=" {{url_for('static',filename='Weatherpic@2x.png')}}" alt="天气图片" width="600" height="320" ></p>
+<!--显示图片的时候一定要static是放图片地址，filename是图片名称，alt是在无法显示图片的时候显示文字-->
+
+<form action="/Weather" method="post" >
+城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username }}">
+<input type="submit" value="查询">
+<input type="button" value=历史 name = “history” onclick="Helptext1()">
+<input type="button" value=帮助 name = ”help“ onclick="Helptext()">
+
+<!--message显示的内容，@app.route('/test',methods=['POST']底下return，message参数)-->
+{% if message %}
+<p style="color:blue" id=“messageid”>{{ message }}</p>
+{% endif %}
+
+<script>
+function Helptext()
+{
+	document.getElementById("helpcontent").innerHTML=
+"<i>输入城市名称，查询该城市的的天气<br />\
+点击'帮助'按钮，获取帮助文档<br />\
+点击'历史'按钮，获取查询历史</i>";
+}
+<!--JavaScript的函数可以实现button响应事件-->
+<!--字符串反斜杠目的是让字符串换行可以连上而不影响语法,<br />显示换行内容-->
+
+
+</script>
+
+<script>
+
+var dict = {{ historydate|safe }}
+function Helptext1()
+{
+  var arr = new Array();
+  for (var key in dict)
+       arr[arr.length] =(key + ':' + dict[key]+'</br>'+'</br>');//将产生的元素增加在arr列表末端
+       var str = arr.toString() //将列表的元素转换成字符串，并且用逗号连接
+	     str = str.replace(/,/g, "")//将字符串去掉所有的逗号
+
+   document.getElementById("helpcontent").innerHTML = str
+
+}
+</script>
+<p id="helpcontent"></p>
+
+</form>
+
+  </body>
+</html>

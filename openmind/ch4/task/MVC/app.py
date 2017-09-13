@@ -5,13 +5,9 @@
 from flask import Flask,request,render_template,make_response,url_for
 import practicetest #导入practicetest.py文件，注意导入文件不能命名XXX2-3，否则报错
 import json
-from jinja2 import Template
-from jinja2 import Environment, PackageLoader
-#import jinja2
-#import os.path
-#env = jinja2.Environment(
-#    loader=jinja2.FileSystemLoader('%s/templates/' % os.path.dirname(__file__))
-#)
+#from jinja2 import Template
+#from jinja2 import Environment, PackageLoader
+
 #env = Environment(loader=PackageLoader('yourapplication', 'templates'))
 #template = env.get_template('Weather.html')
 historydate ={}

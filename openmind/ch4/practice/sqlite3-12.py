@@ -14,8 +14,3 @@ p = Point(4.0 , -3.0)
 
 cur.execute("select ?",(p,))
 print(cur.fetchone()[0])
-
-def test(n):
-    print(n.x+n.y)
-
-test(p)

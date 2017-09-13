@@ -7,13 +7,9 @@ import practicetest #导入practicetest.py文件，注意导入文件不能命�
 import json
 from jinja2 import Template
 from jinja2 import Environment, PackageLoader
-#import jinja2
-#import os.path
-#env = jinja2.Environment(
-#    loader=jinja2.FileSystemLoader('%s/templates/' % os.path.dirname(__file__))
-#)
-#env = Environment(loader=PackageLoader('yourapplication', 'templates'))
-#template = env.get_template('Weather.html')
+
+env = Environment(loader=PackageLoader('yourapplication', 'templates'))
+template = env.get_template('Weather.html')
 historydate ={}
 
 app = Flask(__name__)
@@ -21,9 +17,9 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
-@app.route('/Weather',methods=['GET'])
-def WeatherGet():
-    return render_template('Weather.html')
+#@app.route('/Weather',methods=['GET'])
+#def WeatherGet():
+#    return render_template('Weather.html')
 
 @app.route('/Weather',methods=['POST'])
 def WeatherPost():
