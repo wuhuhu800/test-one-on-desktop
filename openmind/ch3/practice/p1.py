@@ -7,3 +7,10 @@ def hello():
 
 if __name__ == "__main__" :
     app.run()
+
+
+/Users/suncan/Desktop/GitHub/atom/gitpractice/newrepo/my-products/openmind/ch3/practice/MVC
+
+git add .
+
+ 

@@ -17,7 +17,7 @@ sqlite3.register_converter("point",convert_point)
 
 p = Point(4,-3.2)
 
-con = sqlite3.connect(":memory:",detect_types= sqlite3.PARSE_DECLTYPES)
+con = sqlite3.connect(":memory:",detect_types= sqlite3.PARSE_DECLTYPES)#参数值sqlite3.PARSE_DECLTYPES不理解
 cur = con.cursor()
 cur.execute("create table test(p point)")
 cur.execute("insert into test(p) values (?)",(p,))
