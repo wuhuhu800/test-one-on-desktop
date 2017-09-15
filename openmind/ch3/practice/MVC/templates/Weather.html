@@ -11,10 +11,11 @@
 <!--显示图片的时候一定要static是放图片地址，filename是图片名称，alt是在无法显示图片的时候显示文字-->
 
 <form action="/Weather" method="post" >
-城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username }}">
+城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username22 }}">
 <input type="submit" value="查询">
 <input type="button" value=历史 name = “history” onclick="Helptext1()">
-<input type="button" value=帮助 name = ”help“ onclick="Helptext()">
+<input type="submit" value=帮助 name = ”help“ onclick="Helptext()">
+<input type="submit" value="更新" name>
 
 <!--message显示的内容，@app.route('/test',methods=['POST']底下return，message参数)-->
 {% if message %}

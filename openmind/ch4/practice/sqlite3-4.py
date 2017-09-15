@@ -13,5 +13,8 @@ cur = con.cursor()
 cur.execute('create table test(i)') #i表示列表的表头
 cur.execute('insert into test(i) values (1)')# 1表值为1
 cur.execute('insert into test(i) values (2)')
-cur.execute('select mysum(i) from test')#这一行不理解？？？？
-print (cur.fetchone()[0])#取首值
+#cur.execute('select mysum(i) from test')#这一行不理解？？？？
+cur.execute('select i from test')
+#print (cur.fetchall())#取首值
+for r in cur.fetchall():
+    print(r[0])

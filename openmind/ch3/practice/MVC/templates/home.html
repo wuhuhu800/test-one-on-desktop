@@ -3,6 +3,13 @@
   <title>home</title>
 </head>
 <body>
-  <h1 style="font-style:italic">Home now</h1>
+  {% extends "layout.html" %}
+  {% block body %}
+  {% if name %}
+  <h1 style="font-style:italic">Home {{ name }}</h1>
+  {% else %}
+  <h1 style="color:green">Hello World!</h1>
+  {% endif %}
+  {% endblock %}
 </body>
 </html>

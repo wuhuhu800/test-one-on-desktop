@@ -13,6 +13,8 @@ cur = con.cursor()
 cur.execute("create table test1(x)")
 cur.executemany("insert into test1(x) values (?)",[("a",),("b",)])
 cur.execute("select x from test1 order by x collate reverse")
+row = cur.fetchall()
+
 for row in cur:
     print(row)
 print(con.set_authorizer(str))

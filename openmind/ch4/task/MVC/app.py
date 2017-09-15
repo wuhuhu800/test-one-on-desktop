@@ -5,11 +5,15 @@
 from flask import Flask,request,render_template,make_response,url_for
 import practicetest #导入practicetest.py文件，注意导入文件不能命名XXX2-3，否则报错
 import json
+import datas
 #from jinja2 import Template
 #from jinja2 import Environment, PackageLoader
 
 #env = Environment(loader=PackageLoader('yourapplication', 'templates'))
 #template = env.get_template('Weather.html')
+
+
+
 historydate ={}
 
 app = Flask(__name__)
@@ -24,7 +28,7 @@ def WeatherGet():
 @app.route('/Weather',methods=['POST'])
 def WeatherPost():
     user = request.form['user']
-    username = practicetest.SearchWeather(user)
+    username = datas.serch_weather_db(user)
     historydate[user]= username #历史数据列表
     return render_template('Weather.html',message = username,user = user,historydate=json.dumps(historydate))
 
@@ -37,4 +41,4 @@ def not_found(error):
 
 if __name__ =='__main__':
 
-    app.run()
+    app.run(debug = True)
