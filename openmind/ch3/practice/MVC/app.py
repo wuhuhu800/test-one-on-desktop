@@ -35,7 +35,9 @@ def login():
     else:
 
         title = request.args.get('title','Default')
-        return render_template('login.html' , title = title)
+        response = make_response(render_template('login.html',title=title,),200)
+        response.headers['key'] = 'value'
+        return  response  #render_template('login.html' , title = title)
 app.secret_key='123456'
 
 @app.route('/logout')#以下功能就是让用户登出的功能
