@@ -11,7 +11,7 @@ import time
 #             WindDirection text , WindScale INTEGER ,
 #             PRIMARY KEY (City)) ''')
 
-con = sqlite3.connect('weather3.db')
+con = sqlite3.connect('weather3.db',check_same_thread=False)#check_same_thread=False保证只有一个线程在运行
 cur = con.cursor()
 #
 

@@ -7,6 +7,8 @@ import practicetest #导入practicetest.py文件，注意导入文件不能命�
 import json
 from jinja2 import Template
 from jinja2 import Environment, PackageLoader
+import sqlite3
+
 #import jinja2
 #import os.path
 #env = jinja2.Environment(
@@ -16,40 +18,56 @@ from jinja2 import Environment, PackageLoader
 #template = env.get_template('Weather.html')
 historydate ={}
 
+
 app = Flask(__name__)
+app.jinja_env.add_extension('jinja2.ext.do')#jinja语句中可以用with关键词
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')#jinjia语句中可以用do关键词
 #@app.route('/login/<name>',methods=['GET'])
 #def loginget(name):
 #    return render_template('login.html')
+'''
+@app.before_request
+def before_request():
+    g.db = sqlite3.connect('logindata.db')
 
+@app.teardown_request
+def teardown_request(exception):
+    db = getattr(g, 'db', None)
+    if db is not None:
+        db.close()
 
 @app.route('/login',methods=['GET','POST'])
 def login():
     if request.method == 'POST':
-        if request.form['user'] =='admin':
-            session['user'] = request.form['user']
-            return "Admin login successfully "
+        name = request.form['user']
+        password = request.form['password']
+        cursor = g.db.execute('select * from users where name = ? and  password=?',[name,password])
+        if cursor.fetchone() is not None:
+            session['user']= name
+            flash('Login successfully!')
         else:
-            return 'No such user!'
-    if 'user' in session: #登录之后的状态，session已经保存了登录的信息
-       return 'Hello %s!' % session['user']
+            flash('No such user!', 'error')
+            return redirect(url_for('login'))
     else:
+        return render_template('login.html')
+    SECRET_KEY = 'secret_key_1'
 
-        title = request.args.get('title','Default')
-        response = make_response(render_template('login.html',title=title,),200)
-        response.headers['key'] = 'value'
-        return  response  #render_template('login.html' , title = title)
-app.secret_key='123456'
+
 
 @app.route('/logout')#以下功能就是让用户登出的功能
 def logout():
     session.pop('user',None)#猜想是登出时的操作
     return redirect(url_for('login'))
+'''
 
-
-
+@app.route('/home')
 @app.route('/home/<name>',methods=['GET','POST'])
-def home(name):
-    return render_template('home.html',name = name )
+def home(name=None):
+    return render_template('home.html',name = name,digits=[1,2,3,4,5],\
+    users=[{'name':'John'},
+           {'name':'Tom','hidden':True},
+           {'name':'Lisa,'},
+           {'name':'Bob'}])
 
 
 @app.route('/Weather',methods=['GET'])

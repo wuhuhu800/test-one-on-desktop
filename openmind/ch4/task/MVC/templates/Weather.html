@@ -11,17 +11,35 @@
 <!--显示图片的时候一定要static是放图片地址，filename是图片名称，alt是在无法显示图片的时候显示文字-->
 
 <form action="/Weather" method="post" >
-城市: <input type="text" name="user" placeholder="请输入要查询的城市" value="{{ username }}">
-<input type="submit" value="查询">
+城市: <input type="text" name="city" placeholder="请输入要查询的城市" >
+<input name="action" type="submit" value="查询">
 <input type="button" value=历史 name = “history” onclick="Helptext1()">
 <input type="button" value=帮助 name = ”help“ onclick="Helptext()">
-
+<input name="action" type="submit" value="更正">
+</form>
 <!--message显示的内容，@app.route('/test',methods=['POST']底下return，message参数)-->
-{% if message %}
-<p style="color:blue" id=“messageid”>{{ message }}</p>
+{% if weather %}
+<p style="color:blue" id=“messageid”>{{ weather }}</p>
+{% endif %}
+
+{% if get_update %}
+<p>显示更新</p>
+<script>
+
+var userupdjs = {{ userupd|safe }};
+var userupdcity = userupdjs.split(' ')[0];
+var userupdweather = userupdjs.split(' ')[1];
+var db = openDatabase('weather3','','My Database',102400)
+db.run('UPDATE WeatherData SET WeatherDay = ? WHERE City= ?',(userupdweather,userupdcity) );
+document.write(userupdweather);
+
+
+
+</script>
 {% endif %}
 
 <script>
+
 function Helptext()
 {
 	document.getElementById("helpcontent").innerHTML=
@@ -52,7 +70,25 @@ function Helptext1()
 </script>
 <p id="helpcontent"></p>
 
-</form>
+<p id="update"></p>
+
+
+<script>
+//  function Helptext2()
+  //{
+    //var userupdjs = {{ userupd|safe }}
+   // var userupdcity = userupdjs.split(' ')[0]
+  //  var userupdweather = userupdjs.split(' ')[1]
+  //  document.getElementById("update").innerHTML = userupdjs.split(' ')[1]
+  //var db = openDatabase('weather3','','My Database',102400)
+  //db.run('UPDATE WeatherData SET WeatherDay = ? WHERE City= ?',[userupdweather,userupdcity] );
+
+}
+
+
+</script>
+
+
 
   </body>
 </html>

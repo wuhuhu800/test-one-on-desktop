@@ -8,8 +8,9 @@
     {% extends "layout.html" %}
     {% block body %}
     <form name="login" action="/login" method="post">
-      Hello,{{ title }},please login by:
-      <input type="text" name="user" />
+      username:<input type="text" name="user" /><br>
+      password:<input type="text" name="user" /><br>
+      <input type="submit"  value="Submit" />
     </form>
     {% endblock %}
   </body>

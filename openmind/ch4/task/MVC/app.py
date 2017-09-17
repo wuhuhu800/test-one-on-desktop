@@ -14,7 +14,7 @@ import datas
 
 
 
-historydate ={}
+
 
 app = Flask(__name__)
 @app.route('/',methods=['GET','POST'])
@@ -27,10 +27,26 @@ def WeatherGet():
 
 @app.route('/Weather',methods=['POST'])
 def WeatherPost():
-    user = request.form['user']
-    username = datas.serch_weather_db(user)
-    historydate[user]= username #历史数据列表
-    return render_template('Weather.html',message = username,user = user,historydate=json.dumps(historydate))
+    weather = None
+    city = None
+    historydate = None
+    userupd = None
+    get_update = None
+    historydate ={}
+    if request.form['action'] == u'查询':
+        city = request.form['city']
+        weather = datas.serch_weather_db(city)
+        historydate[city]= weather #历史数据列表
+    elif request.form['action'] == u'更正':
+        city = request.form['city']
+        get_update = 1
+    return render_template(
+    'Weather.html',
+    weather = weather,
+    city = city,
+    historydate=json.dumps(historydate),
+    userupd = json.dumps(city),
+    get_update = get_update)
 
 @app.errorhandler(404) #404报错
 def not_found(error):

@@ -3,6 +3,9 @@
   <title>home</title>
 </head>
 <body>
+  <style type="text/css">
+    .odd {background-color: #BDF;}
+  </style>
   {% extends "layout.html" %}
   {% block body %}
   {% if name %}
@@ -10,6 +13,49 @@
   {% else %}
   <h1 style="color:green">Hello World!</h1>
   {% endif %}
+
+  <div class="like">
+    {% for digit in digits %}
+      {{ digit }}
+      {% endfor %}
+  </div>
+  {{ users }}
+
+<dl >
+  {% for user in users if not user.hidden %}
+  {% if loop.first %}
+  <div>User List:  </div>
+  {% endif %}
+  <div class="{{ loop.cycle('odd','even') }}">
+    <dt>User NO. {{ loop.index }}:</dt>
+    <dd>{{ user.name }}</dd>
+    </div>
+    <div>
+      {% if loop.last %}
+      <div>Total Users:{{ loop.length }}</div>
+      {% endif %}
+      {% else %}
+      <li> No users found</li>
+      {% endfor %}
+</div>
+</div>
+</dl>
+{% for item in [[1,2],[3,4,5]] recursive %}
+Depth: {{ loop.depth }}
+{% if item[0] %}
+{{ loop(item) }}
+{{ 'YES' }}
+{% else %}
+{{ 'NOOO' }}
+Number:{{ item }}
+{% endif %}
+{% endfor %}
+
+{% with arr=['Sunny'] %}
+{% do arr.append('Rainy') %}
+{{ arr }}
+{% endwith %}
+
   {% endblock %}
 </body>
 </html>
