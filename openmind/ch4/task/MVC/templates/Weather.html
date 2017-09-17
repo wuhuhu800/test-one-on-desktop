@@ -22,21 +22,27 @@
 <p style="color:blue" id=“messageid”>{{ weather }}</p>
 {% endif %}
 
-{% if get_update %}
-<p>显示更新</p>
+{% if get_update ==1 %}
+<p>更新成功</p>
+{% endif %}
+
+{% if get_update ==2 %}
+<p>没有该天气，请重新更新</p>
+{% endif %}
 <script>
 
-var userupdjs = {{ userupd|safe }};
-var userupdcity = userupdjs.split(' ')[0];
-var userupdweather = userupdjs.split(' ')[1];
-var db = openDatabase('weather3','','My Database',102400)
-db.run('UPDATE WeatherData SET WeatherDay = ? WHERE City= ?',(userupdweather,userupdcity) );
-document.write(userupdweather);
+//var userupdjs = {{ userupd|safe }};
+//var userupdcity = userupdjs.split(' ')[0];
+//var userupdweather = userupdjs.split(' ')[1];
+//var db = openDatabase('weather3','','My Database',102400)
+//db.run('UPDATE WeatherData SET WeatherDay = ? WHERE City= ?',[userupdweather,userupdcity] );
+//document.write(userupdweather);
+
 
 
 
 </script>
-{% endif %}
+
 
 <script>
 

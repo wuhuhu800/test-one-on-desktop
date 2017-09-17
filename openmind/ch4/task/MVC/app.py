@@ -3,7 +3,7 @@
 '''
 
 from flask import Flask,request,render_template,make_response,url_for
-import practicetest #导入practicetest.py文件，注意导入文件不能命名XXX2-3，否则报错
+import practicetest #导入practicetest.py文件,注意导入文件不能命名XXX2-3,否则报错
 import json
 import datas
 #from jinja2 import Template
@@ -27,6 +27,7 @@ def WeatherGet():
 
 @app.route('/Weather',methods=['POST'])
 def WeatherPost():
+    # 不加None会产生全局变量和局部变量冲突问题。
     weather = None
     city = None
     historydate = None
@@ -39,7 +40,13 @@ def WeatherPost():
         historydate[city]= weather #历史数据列表
     elif request.form['action'] == u'更正':
         city = request.form['city']
-        get_update = 1
+        citykey,cityweather = city.split(' ')
+        weatherlist = ['晴', '晴到多云', '多云', '阴', '小雨','阵雨' ,'中雨', '大雨', '大到暴雨','雷阵雨', '雨夹雪', '小雪', '中雪', '大到暴雪', '冰雹', '霜冻', '雾' ]
+        if cityweather in weatherlist:
+            datas.update_weather(citykey,cityweather)
+            get_update = 1
+        else:
+            get_update = 2
     return render_template(
     'Weather.html',
     weather = weather,
@@ -56,5 +63,7 @@ def not_found(error):
 
 
 if __name__ =='__main__':
-
     app.run(debug = True)
+    while True:
+        datas.auto_update()#自动更新数据库
+        time.sleep(1200)#注意参数是秒

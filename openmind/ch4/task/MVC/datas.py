@@ -60,8 +60,41 @@ def serch_weather_db(userserch):
 
         return weather_strin
     con.commit()
-    con.close()
 
+
+def update_weather(city,weather):
+    cur.execute('UPDATE WeatherData SET WeatherDay = ? where City = ?',(weather,city))
+    con.commit()
+
+
+def auto_update():
+    while True:
+
+        cur.execute('select City from WeatherData')
+        try:
+            for Cityi in cur.fetchall():#取出数据库的关键字进行更新
+                #Cityi[0]是数据库的城市名称
+                WeatherDay1 = practicetest.SearchWeather(Cityi[0])[1]
+                WeatherNight1 = practicetest.SearchWeather(Cityi[0])[2]
+                TemperatureHigh1 = practicetest.SearchWeather(Cityi[0])[3]
+                TemperatureLow1 = practicetest.SearchWeather(Cityi[0])[4]
+                WindDirection1 = practicetest.SearchWeather(Cityi[0])[5]
+                WindScale1 = practicetest.SearchWeather(Cityi[0])[6]
+
+                cur.execute('UPDATE WeatherData SET WeatherDay = ? WHERE City= ?',(WeatherDay1,Cityi[0]) )
+                cur.execute('UPDATE WeatherData SET WeatherNight = ? WHERE City= ?',(WeatherNight1,Cityi[0]) )
+                cur.execute('UPDATE WeatherData SET TemperatureHigh = ? WHERE City= ?',(TemperatureHigh1,Cityi[0]) )
+                cur.execute('UPDATE WeatherData SET TemperatureDailylow = ? WHERE City= ?',(TemperatureLow1,Cityi[0]) )
+                cur.execute('UPDATE WeatherData SET WindDirection = ? WHERE City= ?',(WindDirection1,Cityi[0]) )
+                cur.execute('UPDATE WeatherData SET WindScale = ? WHERE City= ?',(WindScale1,Cityi[0]) )
+
+                time.sleep(10)#注意参数是秒
+
+        except sqlite3.OperationalError:
+            print("database locked!!!")
+        con.commit()#每次更新完之后保存
+        time.sleep(1200)#注意参数是秒
 if __name__ =='__main__':
     UserInputCity = input('请输入所要查询的城市>>>')
     serch_weather_db(UserInputCity)
+    auto_update()
