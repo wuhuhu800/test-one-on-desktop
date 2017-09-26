@@ -68,7 +68,6 @@ def update_weather(city,weather):
 
 
 def auto_update():
-    while True:
 
         cur.execute('select City from WeatherData')
         try:
@@ -93,7 +92,7 @@ def auto_update():
         except sqlite3.OperationalError:
             print("database locked!!!")
         con.commit()#每次更新完之后保存
-        time.sleep(1200)#注意参数是秒
+        #time.sleep(1200)#注意参数是秒
 if __name__ =='__main__':
     UserInputCity = input('请输入所要查询的城市>>>')
     serch_weather_db(UserInputCity)

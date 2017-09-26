@@ -6,6 +6,7 @@ from flask import Flask,request,render_template,make_response,url_for
 import practicetest #导入practicetest.py文件,注意导入文件不能命名XXX2-3,否则报错
 import json
 import datas
+import time
 #from jinja2 import Template
 #from jinja2 import Environment, PackageLoader
 
@@ -63,7 +64,8 @@ def not_found(error):
 
 
 if __name__ =='__main__':
-    app.run(debug = True)
+
     while True:
-        datas.auto_update()#自动更新数据库
-        time.sleep(1200)#注意参数是秒
+        app.run(debug = True)
+#        datas.auto_update()#自动更新数据库
+        tt.sleep(15)#注意参数是秒
