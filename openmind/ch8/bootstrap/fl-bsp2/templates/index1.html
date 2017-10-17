@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block title %}首页{% endblock %}
+
+{% block page_content %}
+<h1>这里是首页，Hello World！</h1>
+
+<p>{{ moment(current_time).format('LLL') }}</p>
+<!--{{ moment(current_time).format('LLL') }}：根据客户端电脑中的时区和区域设置渲染日期和时间。参数决定了渲染的方式，'L'到'LLL'分别对应不同的复杂度。format()函数还可以接受自定义的格式说明符。-->
+
+
+
+<p>{{ moment(current_time).fromNow(refresh=True) }}</p>
+<!-- {{ moment(current_time).fromNow(refresh=True) }}：moment是app.py开放的类，current_time是app.py传递过来的参数，fromNow()渲染相对时间戳，参数refresh=True会随着时间的推移自动刷新显示时间。-->
+{% endblock %}
